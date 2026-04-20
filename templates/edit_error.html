@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h2>Edit Error</h2>
+
+    <form method="POST" enctype="multipart/form-data" class="form-grid">
+        <label>Error Name</label>
+        <input type="text" name="error_name" value="{{ error.error_name }}" required>
+
+        <label>Category</label>
+        <select name="category_id" required>
+            {% for category in categories %}
+                <option value="{{ category.id }}" {% if category.id == error.category_id %}selected{% endif %}>
+                    {{ category.name }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <label>Tool Name</label>
+        <input type="text" name="tool_name" value="{{ error.tool_name or '' }}">
+
+        <label>Error Message</label>
+        <textarea name="error_message" rows="4">{{ error.error_message or '' }}</textarea>
+
+        <label>Root Cause</label>
+        <textarea name="root_cause" rows="4">{{ error.root_cause or '' }}</textarea>
+
+        <label>Solution</label>
+        <textarea name="solution" rows="4">{{ error.solution or '' }}</textarea>
+
+        {% if error.image_path %}
+            <label>Current Screenshot</label>
+            <div class="image-block">
+                <img src="{{ url_for('uploaded_file', filename=error.image_path) }}" alt="Current Screenshot">
+            </div>
+
+            <label>
+                <input type="checkbox" name="remove_image" value="yes">
+                Remove current image
+            </label>
+        {% endif %}
+
+        <label>Upload New Screenshot</label>
+        <input type="file" name="image" accept="image/*">
+
+        <button type="submit" class="btn btn-primary">Update Error</button>
+    </form>
+</div>
+{% endblock %}

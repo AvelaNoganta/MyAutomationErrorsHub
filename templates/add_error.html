@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h2>Add Error</h2>
+
+    <form method="POST" enctype="multipart/form-data" class="form-grid">
+        <label>Error Name</label>
+        <input type="text" name="error_name" required>
+
+        <label>Category</label>
+        <select name="category_id" required>
+            {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Tool Name</label>
+        <input type="text" name="tool_name">
+
+        <label>Error Message</label>
+        <textarea name="error_message" rows="4"></textarea>
+
+        <label>Root Cause</label>
+        <textarea name="root_cause" rows="4"></textarea>
+
+        <label>Solution</label>
+        <textarea name="solution" rows="4"></textarea>
+
+        <label>Upload Error Screenshot</label>
+        <input type="file" name="image" accept="image/*">
+
+        <button type="submit" class="btn btn-primary">Save Error</button>
+    </form>
+</div>
+{% endblock %}
