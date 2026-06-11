@@ -1,7 +1,8 @@
-import os
-import uuid
 import math
+import os
 import sqlite3
+import uuid
+
 from flask import Flask, request, render_template, send_from_directory, redirect, url_for
 from werkzeug.utils import secure_filename
 
