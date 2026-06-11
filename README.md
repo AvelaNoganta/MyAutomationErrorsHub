@@ -8,17 +8,37 @@ A small web application to store common errors that automation students/instruct
 
 To help automation students/instructors to solve issues quicker
 
+## Technology Stack
+
+* Python
+* Flask
+* SQLite
+
+## Database
+
+This application uses SQLite as its database.
+
+SQLite is an embedded database engine, which means no separate database server needs to be installed or configured.
+The database is stored in a single file called `error_hub.db`.
+
+When the application starts for the first time, it automatically:
+
+1. Creates the `error_hub.db` database file
+2. Creates the required tables
+3. Inserts the default categories
+
+The database file is created in the project root directory.
+
 ## Pre-requisites
 
 * Python 3.10+
 * pip
 * Git
 * PyCharm or any Python IDE
-* sqlite
 
 ## Setup Instructions
 
-1. Create a virtual environment 
+1. Create a virtual environment
 
 ```bash
 python -m venv .venv
@@ -36,7 +56,6 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-
 ## How to run?
 
 ```bash
@@ -51,16 +70,39 @@ python app.py
 
 ## Development Server
 
-To view the application: Open http://127.0.0.1:5000 
+Open the application in your browser:
 
-### To view the database
+http://127.0.0.1:5000
 
-* Download db browser for sqlite mac https://sqlitebrowser.org/dl/  
-* Open the `error_hub.db` file to view the database tables and data
+## Viewing the Database
 
-### Common Issues 
+To inspect the database contents:
 
-If you get this error Access to 127.0.0.1 was denied 
-* Paste this on browser `chrome://net-internals/#sockets` 
-* Click on "Flush socket pools" 
-* Try again to access http://127.0.0.1:5000 
+1. Download DB Browser for SQLite:
+   https://sqlitebrowser.org/dl/
+
+2. Open the generated `error_hub.db` file.
+
+You can then view:
+
+* Tables
+* Records
+* Database structure
+
+## Common Issues
+
+### Access to 127.0.0.1 was denied
+
+1. Open:
+
+```
+chrome://net-internals/#sockets
+```
+
+2. Click **Flush socket pools**
+
+3. Refresh:
+
+```
+http://127.0.0.1:5000
+``` 
