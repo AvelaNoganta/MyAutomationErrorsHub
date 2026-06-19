@@ -129,6 +129,7 @@ button,
     align-items: center;
     flex-wrap: wrap;
 }
+
 .clickable-image {
     max-width: 320px;
     width: 100%;
