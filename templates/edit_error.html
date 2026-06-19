@@ -11,7 +11,7 @@
         <label>Category</label>
         <select name="category_id" required>
             {% for category in categories %}
-            <option value="{{ category.id }}" {% if category.id == error.category_id %}selected{% endif %}>
+            <option value="{{ category.id }}" {% if category.id== error.category_id %}selected{% endif %}>
                 {{ category.name }}
             </option>
             {% endfor %}
@@ -32,7 +32,13 @@
         {% if error.image_path %}
         <label>Current Screenshot</label>
         <div class="image-block">
-            <img src="{{ url_for('uploaded_file', filename=error.image_path) }}" alt="Current Screenshot">
+            <a href="{{ url_for('uploaded_file', filename=error.image_path) }}" target="_blank">
+                <img
+                        src="{{ url_for('uploaded_file', filename=error.image_path) }}"
+                        alt="Error Screenshot"
+                        class="clickable-image"
+                >
+            </a>
         </div>
 
         <label>
@@ -47,20 +53,4 @@
         <button type="submit" class="btn btn-primary">Update Error</button>
     </form>
 </div>
-{% if error.image_path %}
-<div class="image-block">
-    <p>
-        <strong>Screenshot:</strong>
-        <small>(Click image to enlarge)</small>
-    </p>
-
-    <a href="{{ url_for('uploaded_file', filename=error.image_path) }}" target="_blank">
-        <img
-                src="{{ url_for('uploaded_file', filename=error.image_path) }}"
-                alt="Error Screenshot"
-                class="clickable-image"
-        >
-    </a>
-</div>
-{% endif %}
 {% endblock %}
