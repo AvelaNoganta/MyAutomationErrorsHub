@@ -1,8 +1,8 @@
-import math
 import os
 import sqlite3
 import uuid
 
+import math
 from flask import Flask, request, render_template, send_from_directory, redirect, url_for
 from werkzeug.utils import secure_filename
 
@@ -39,6 +39,7 @@ def uploaded_file(filename):
 def home():
     search = request.args.get("search", "").strip()
     page = request.args.get("page", 1, type=int)
+
     categories = CategoryModel.get_all_categories()
 
     if search:
@@ -50,13 +51,16 @@ def home():
 
     total_pages = math.ceil(total_errors / PER_PAGE) if total_errors > 0 else 1
 
+    total_error_count = ErrorModel.count_all_errors()
+
     return render_template(
         "home.html",
         errors=errors,
-        search=search,
         categories=categories,
+        search=search,
         page=page,
-        total_pages=total_pages
+        total_pages=total_pages,
+        total_error_count=total_error_count
     )
 
 
